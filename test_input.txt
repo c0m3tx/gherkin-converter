@@ -1,0 +1,12 @@
+Feature: feature name
+
+    Scenario: scenario name
+        Given something
+        When I do something
+        Then I get some result
+
+    Scenario: another scenario
+        Given precondition
+        When I do things
+        And I do other things
+        Then I can do something
