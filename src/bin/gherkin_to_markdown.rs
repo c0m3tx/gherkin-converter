@@ -61,7 +61,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_to_markdown() {
+    fn test_output() {
         let feature = Feature {
             name: Some("Some feature".to_string()),
             scenarios: vec![
