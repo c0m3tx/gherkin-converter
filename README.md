@@ -2,6 +2,14 @@
 
 Converts gherkin files into markdown/youtrack compatible formats.
 
+## Install
+
+Download latest version from [releases](https://github.com/c0m3tx/gherkin-converter/releases) for your OS/arch, make it executable
+
+    chmod +x gherkin-converter
+
+and put the file anywhere in your path. Binaries for windows and many architectures are not provided, but it's pretty easy to build it yourself.
+
 ## Build
 
 Just run
@@ -14,11 +22,11 @@ It will create a file
 
 ## Usage
 
-    target/release/gherkin-converter markdown [<file>]
+    target/release/gherkin-converter --format markdown [<file>]
 
 or
 
-    target/release/gherkin-converter youtrack [<file>]
+    target/release/gherkin-converter --format youtrack [<file>]
 
 If file is not given, reads from stdin.
 
