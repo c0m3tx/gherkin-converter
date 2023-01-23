@@ -1,5 +1,5 @@
 [package]
-name = "gherkin-to-markdown"
+name = "gherkin-converter"
 version = "0.1.0"
 edition = "2021"
 
@@ -7,11 +7,3 @@ edition = "2021"
 
 [dependencies]
 regex = "1.7.1"
-
-[[bin]]
-name = "gherkin-to-markdown"
-path = "src/bin/gherkin_to_markdown.rs"
-
-[[bin]]
-name = "gherkin-to-youtrack"
-path = "src/bin/gherkin_to_youtrack.rs"

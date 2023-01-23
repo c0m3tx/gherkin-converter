@@ -1,6 +1,5 @@
-use gherkin_to_markdown::default_cli_parse;
-use gherkin_to_markdown::Feature;
-use gherkin_to_markdown::Scenario;
+use crate::parser::Feature;
+use crate::parser::Scenario;
 use std::io::Write;
 
 trait ToMarkdown {
@@ -42,18 +41,13 @@ impl ToMarkdown for Scenario {
     }
 }
 
-fn write_output(features: Vec<Feature>, mut writer: impl Write) -> Result<(), std::io::Error> {
+pub fn format(features: Vec<Feature>, mut writer: impl Write) -> Result<(), std::io::Error> {
     let output_content = features
         .iter()
         .map(Feature::to_markdown)
         .collect::<Vec<_>>()
         .join("\n\n");
     writer.write_all(output_content.as_bytes())
-}
-
-fn main() {
-    let features = default_cli_parse();
-    write_output(features, std::io::stdout()).expect("Unable to write");
 }
 
 #[cfg(test)]

@@ -1,7 +1,7 @@
-use gherkin_to_markdown::default_cli_parse;
-use gherkin_to_markdown::Feature;
-use gherkin_to_markdown::Scenario;
-use gherkin_to_markdown::Step;
+use crate::parser::default_cli_parse;
+use crate::parser::Feature;
+use crate::parser::Scenario;
+use crate::parser::Step;
 use std::io::Write;
 
 trait ToYoutrack {
@@ -56,18 +56,13 @@ impl ToYoutrack for Step {
     }
 }
 
-fn write_output(features: Vec<Feature>, mut writer: impl Write) -> Result<(), std::io::Error> {
+pub fn format(features: Vec<Feature>, mut writer: impl Write) -> Result<(), std::io::Error> {
     let html = features
         .iter()
         .map(Feature::to_yt)
         .collect::<Vec<_>>()
         .join("\n\n");
     writer.write_all(html.as_bytes())
-}
-
-fn main() {
-    let features = default_cli_parse();
-    write_output(features, std::io::stdout()).expect("Unable to write");
 }
 
 #[cfg(test)]

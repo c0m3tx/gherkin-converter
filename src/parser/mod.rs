@@ -1,5 +1,3 @@
-#![allow(dead_code, unused_imports)]
-
 use std::io::Read;
 use std::io::Write;
 
@@ -43,8 +41,8 @@ pub struct Feature {
     pub scenarios: Vec<Scenario>,
 }
 
-pub fn default_cli_parse() -> Vec<Feature> {
-    let features = match std::env::args().nth(1) {
+pub fn default_cli_parse(file: Option<String>) -> Vec<Feature> {
+    let features = match file {
         None => parse_stdin(std::io::stdin()),
         Some(filename) => parse_file(filename),
     };
@@ -145,7 +143,7 @@ fn parse_input(input: &str) -> Vec<Feature> {
 mod tests {
     use super::*;
 
-    const TEST_INPUT: &str = include_str!("../test_input.txt");
+    const TEST_INPUT: &str = include_str!("../../test_input.txt");
 
     #[test]
     fn test_parse_input() {

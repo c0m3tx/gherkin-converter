@@ -8,18 +8,17 @@ Just run
 
     cargo build --release
 
-It will create two files
+It will create a file
 
-    target/release/gherkin-to-markdown
-    target/release/gherkin-to-youtrack
+    target/release/gherkin-converter
 
 ## Usage
 
-    target/release/gherkin-to-markdown [<file>]
+    target/release/gherkin-converter markdown [<file>]
 
 or
 
-    target/release/gherkin-to-youtrack [<file>]
+    target/release/gherkin-converter youtrack [<file>]
 
 If file is not given, reads from stdin.
 
