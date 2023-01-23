@@ -2,7 +2,7 @@ name: cargo-build
 run-name: ${{ github.actor }} is learning GitHub Actions
 on: [push]
 jobs:
-  test:
+  tests:
     name: cargo-test
     runs-on: ubuntu-latest
     steps:
@@ -12,6 +12,7 @@ jobs:
 
   build-linux:
     runs-on: ubuntu-latest
+    needs: [tests]
     steps:
       - uses: actions/checkout@v3
       - uses: actions-rust-lang/setup-rust-toolchain@v1
