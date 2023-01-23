@@ -35,5 +35,5 @@ jobs:
           prerelease: true
           title: "Development Build"
           files: |
-            target/release/gherkin-to-markdown
-            target/release/gherkin-to-youtrack
+            ./target/release/gherkin-to-markdown
+            ./target/release/gherkin-to-youtrack
