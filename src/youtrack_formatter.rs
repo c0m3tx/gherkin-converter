@@ -1,4 +1,3 @@
-use crate::parser::default_cli_parse;
 use crate::parser::Feature;
 use crate::parser::Scenario;
 use crate::parser::Step;
