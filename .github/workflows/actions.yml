@@ -9,6 +9,7 @@ jobs:
       - uses: actions-rust-lang/setup-rust-toolchain@v1
       - run: cargo test --all-features
   build-linux:
+    if: contains(github.ref, "ref/tags")
     runs-on: ubuntu-latest
     needs: [tests]
     steps:
@@ -23,6 +24,7 @@ jobs:
           name: gherkin-converter-linux
           path: gherkin-converter-linux
   build-macos:
+    if: contains(github.ref, "ref/tags")
     runs-on: macos-latest
     needs: [tests]
     steps:
@@ -35,6 +37,7 @@ jobs:
           name: gherkin-converter-macos
           path: gherkin-converter-macos
   create-package:
+    if: contains(github.ref, "ref/tags")
     runs-on: ubuntu-latest
     needs: [build-linux, build-macos]
     steps:
@@ -47,9 +50,7 @@ jobs:
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "latest"
-          prerelease: true
-          title: "Development Build"
+          prerelease: false
           files: |
             gherkin-converter-linux
             gherkin-converter-macos
