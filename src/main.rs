@@ -1,7 +1,9 @@
 mod parser;
 
-mod markdown_formatter;
-mod youtrack_formatter;
+mod formatter;
+
+use formatter::markdown;
+use formatter::youtrack;
 
 use clap::Parser;
 
@@ -24,8 +26,8 @@ fn main() {
     let args = Args::parse();
 
     match args.format.as_str() {
-        "youtrack" => parse_with!(youtrack_formatter, args.target),
-        "markdown" => parse_with!(markdown_formatter, args.target),
+        "youtrack" => parse_with!(youtrack, args.target),
+        "markdown" => parse_with!(markdown, args.target),
         _ => {
             eprintln!("Unknown format: {}", args.format);
             std::process::exit(1);
