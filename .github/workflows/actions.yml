@@ -1,5 +1,4 @@
 name: cargo-build
-run-name: ${{ github.actor }} is learning GitHub Actions
 on: [push]
 jobs:
   tests:
@@ -12,6 +11,13 @@ jobs:
 
   build-linux:
     runs-on: ubuntu-latest
+    needs: [tests]
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
+      - run: cargo build --release
+  build-macos:
+    runs-on: macos-latest
     needs: [tests]
     steps:
       - uses: actions/checkout@v3
