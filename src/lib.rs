@@ -39,6 +39,7 @@ pub struct Scenario {
 #[derive(Debug)]
 pub struct Feature {
     pub name: Option<String>,
+    pub description: Option<String>,
     pub scenarios: Vec<Scenario>,
 }
 
@@ -91,13 +92,24 @@ fn parse_feature(name: Option<String>, input: &[&str]) -> Feature {
         .chain(std::iter::once(input.len()))
         .collect();
 
+    let description: Vec<String> = input[1..scenario_rows[0]]
+        .iter()
+        .filter_map(|&s| (!s.is_empty()).then_some(s.trim().into()))
+        .collect();
+
+    let description = (description.len() > 0).then_some(description.join("\n"));
+
     let scenarios = scenario_rows
         .windows(2)
         .map(|window| (window[0], window[1]))
         .map(|(start, end)| parse_scenario(&input[start..end]))
         .collect();
 
-    Feature { name, scenarios }
+    Feature {
+        name,
+        description,
+        scenarios,
+    }
 }
 
 fn parse_input(input: &str) -> Vec<Feature> {
@@ -141,6 +153,7 @@ mod tests {
         assert_eq!(features.len(), 1);
         let feature = &features[0];
         assert_eq!(feature.name, Some("feature name".to_string()));
+        assert_eq!(feature.description, Some("This is the feature description.\nIt may span multiple lines, but it is not required.".into()));
         let scenario = &feature.scenarios[0];
         assert_eq!(scenario.name, "scenario name");
         let steps = &scenario.steps;

@@ -1,4 +1,6 @@
 Feature: feature name
+    This is the feature description.
+    It may span multiple lines, but it is not required.
 
     Scenario: scenario name
         Given something

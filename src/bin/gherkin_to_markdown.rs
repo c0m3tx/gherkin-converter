@@ -64,6 +64,7 @@ mod tests {
     fn test_output() {
         let feature = Feature {
             name: Some("Some feature".to_string()),
+            description: None,
             scenarios: vec![
                 Scenario {
                     name: "Some scenario".to_string(),
