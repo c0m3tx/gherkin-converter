@@ -22,12 +22,8 @@ jobs:
     needs: [build-linux]
     steps:
       - uses: actions/checkout@v3
-      - uses: "marvinpinto/action-automatic-releases@latest"
+      - uses: softprops/action-gh-release@v1
         with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "latest"
-          prerelease: true
-          title: "Development Build"
           files: |
             target/release/gherkin-to-markdown
             target/release/gherkin-to-youtrack
