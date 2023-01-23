@@ -1,0 +1,12 @@
+name: cargo-build
+run-name: ${{ github.actor }} is learning GitHub Actions
+on: [push]
+jobs:
+  build-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-rust@v3
+        with:
+          rust-version: "1.66"
+      - run: cargo build --release
