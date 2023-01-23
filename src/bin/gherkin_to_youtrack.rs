@@ -43,9 +43,15 @@ impl ToYoutrack for Scenario {
 
 impl ToYoutrack for Step {
     fn to_yt(&self) -> String {
+        let pattern = regex::Regex::new(r#"("[^"]*")"#).unwrap();
+        let description = pattern.replace_all(
+            &self.description,
+            r#"<span style="color: dodgerblue">$1</span>"#,
+        );
+
         format!(
             r#"<span style="color: darkorange">{}</span> {}"#,
-            self.keyword, self.description
+            self.keyword, description
         )
     }
 }
@@ -76,7 +82,11 @@ mod tests {
             scenarios: vec![
                 Scenario {
                     name: "Some scenario".to_string(),
-                    steps: vec!["Given A".into(), "When B".into(), "Then C".into()],
+                    steps: vec![
+                        "Given A".into(),
+                        "When I insert \"B\" into field".into(),
+                        "Then C".into(),
+                    ],
                 },
                 Scenario {
                     name: "Some other scenario".to_string(),
@@ -89,7 +99,7 @@ mod tests {
             r#"## Some feature
 - [ ] Some scenario
 <pre style="padding-top: 10px; padding-bottom: 10px; margin-bottom: 20px"><span style="color: darkorange">Given</span> A
-<span style="color: darkorange">When</span> B
+<span style="color: darkorange">When</span> I insert <span style="color: dodgerblue">"B"</span> into field
 <span style="color: darkorange">Then</span> C</pre>
 
 - [ ] Some other scenario
